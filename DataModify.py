@@ -27,13 +27,16 @@ def modify(RawData, Name):
 def linAutoCorr(LogRetNorm):
     LogRetNorm_new = LogRetNorm.drop(LogRetNorm.index[0])
     LogRetNorm_old = LogRetNorm.shift(1).drop(LogRetNorm.shift(1).index[0])
-    print(LogRetNorm_new*LogRetNorm_old)
-    print( np.average(LogRetNorm_new)*np.average(LogRetNorm_old))
-    return np.average(LogRetNorm_new*LogRetNorm_old) - np.average(LogRetNorm_new)*np.average(LogRetNorm_old)
+    multiply = LogRetNorm_new*LogRetNorm_old
+    return multiply.mean() - LogRetNorm_new.mean()*LogRetNorm_old.mean()
     # return np.average(LogRetNorm*LogRetNorm.shift(1)) - np.average(LogRetNorm)*np.average(LogRetNorm.shift(1))
 
 def nonLinAutoCorr(LogRetNorm, q):
-    return np.average(np.abs(LogRetNorm*LogRetNorm.shift(1))**q) - np.average(np.abs(LogRetNorm)**q)*np.average(np.abs(LogRetNorm.shift(1))**q)
+    LogRetNorm_new = np.abs(LogRetNorm.drop(LogRetNorm.index[0]))**q
+    LogRetNorm_old = np.abs(LogRetNorm.shift(1).drop(LogRetNorm.shift(1).index[0]))**q
+    multiply = np.abs(LogRetNorm_new*LogRetNorm_old)**q
+    return multiply.mean() - LogRetNorm_new.mean()*LogRetNorm_old.mean()
+    # return np.average(np.abs(LogRetNorm*LogRetNorm.shift(1))**q) - np.average(np.abs(LogRetNorm)**q)*np.average(np.abs(LogRetNorm.shift(1))**q)
 
 def crossCorr(i, j):
     return (np.average(i*j) - np.average(i)*np.average(j)) / (np.std(i)*np.std(j))

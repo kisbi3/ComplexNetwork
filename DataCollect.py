@@ -194,5 +194,5 @@ TotalLogRetNorm.index.name="Date"
 print(TotalPrice)
 print(TotalLogRetNorm)
 
-TotalPrice.to_csv(f"./TotalPrice.csv")
-TotalLogRetNorm.to_csv(f"./TotalLogRetNorm.csv")
+TotalPrice.to_csv(f"./ResultData/TotalPrice.csv")
+TotalLogRetNorm.to_csv(f"./ResultData/TotalLogRetNorm.csv")
