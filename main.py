@@ -22,6 +22,8 @@ NonLinAutoCorr.to_csv("./ResultData/NonLinearAutoCorrelation.csv")
 
 # Data shuffle
 TotalLogRetNorm_random=TotalLogRetNorm.sample(frac=1).reset_index(drop=True)
+TotalLogRetNorm_random.to_csv("./ResultData/TotalLogRetNorm_random.csv")
+TotalLogRetNorm_random = pd.read_csv('./ResultData/TotalLogRetNorm_random.csv', index_col=0)
 CrossCorr_random = TotalLogRetNorm_random.corr(method=Modify.crossCorr)
 CrossCorr_random.to_csv("./ResultData/CrossCorrelation_random.csv")
 MetricDist_random = Modify.metricdist(CrossCorr_random)
